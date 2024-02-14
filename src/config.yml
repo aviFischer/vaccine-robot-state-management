@@ -1,0 +1,7 @@
+arduino_serial_port: /dev/tty0
+pins: #dummy values for now
+  breakbeam_signal: 1
+  disposal_direction0: 2
+  disposal_direction1: 3
+  disposal_pwm_0: 4
+  disposal_pwm_1: 5
