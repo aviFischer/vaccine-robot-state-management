@@ -4,8 +4,6 @@ from .IMarlinClient import IMarlinClient
 
 class MarlinClient(IMarlinClient):
 
-    serial_port: serial.Serial
-
     def __init__(self, com_port, baud_rate):
 
         try:

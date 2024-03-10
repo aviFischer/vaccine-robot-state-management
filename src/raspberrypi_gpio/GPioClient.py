@@ -1,4 +1,7 @@
-import RPi.GPIO as GPIO # this library only works on raspbian
+try:
+    import RPi.GPIO as GPIO # this library only works on raspbian
+except Exception as e:
+    pass
 import time
 
 from .IGpioClient import IGpioClient
