@@ -20,7 +20,7 @@ stateDiagram-v2
     idle-->determine_injection_location: start injection
     determine_injection_location-->retrieve_vaccine: injection location found
     retrieve_vaccine-->deliver_vaccine: vaccine retrieved
-    deliver_vaccine-->dispose_vaccine: vaccine deliverd
+    deliver_vaccine-->dispose_vaccine: vaccine delivered
     dispose_vaccine-->idle: vaccine disposed
     determine_injection_location-->error: couldn't find injection location
     retrieve_vaccine-->error: retrieval failed

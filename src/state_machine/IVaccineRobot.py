@@ -2,45 +2,62 @@ from abc import ABC, abstractmethod
 
 class IVaccineRobot(ABC):
 
-    # "Event" functions
+    # event functions
     @abstractmethod
-    def injection_started(self):
+    def send_injection_started(self):
         pass
 
     @abstractmethod
-    def shoulder_detected(self, location):
+    def send_shoulder_detected(self):
         pass
 
     @abstractmethod
-    def shoulder_detection_failed(self):
+    def send_shoulder_detection_failed(self):
         pass
 
     @abstractmethod
-    def vaccine_picked_up(self):
+    def send_vaccine_picked_up(self):
         pass
 
     @abstractmethod
-    def vaccine_pickup_failed(self):
+    def send_vaccine_pickup_failed(self):
         pass
 
     @abstractmethod
-    def vaccine_delivered(self):
+    def send_vaccine_delivered(self):
         pass
 
     @abstractmethod
-    def vaccine_delivery_failed(self):
+    def send_vaccine_delivery_failed(self):
         pass
 
     @abstractmethod
-    def vaccine_disposed(self):
+    def send_vaccine_disposed(self):
         pass
 
     @abstractmethod
-    def vaccine_disposal_failed(self):
+    def send_vaccine_disposal_failed(self):
         pass
 
     @abstractmethod
-    def error_cleared(self):
+    def send_error_cleared(self):
+        pass
+
+    # side effect functions
+    @abstractmethod
+    def determine_injection_location(self):
+        pass
+
+    @abstractmethod
+    def vaccine_pickup(self):
+        pass
+
+    @abstractmethod
+    def vaccine_delivery(self):
+        pass
+
+    @abstractmethod
+    def vaccine_disposal(self):
         pass
 
     # Getters and setters
