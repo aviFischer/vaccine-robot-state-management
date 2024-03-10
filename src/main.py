@@ -5,7 +5,7 @@ from state_machine import VaccineRobot
 
 # doing all initialization for the classes here (maybe switch to dependency injection)
 def main():
-    gpio_client = GPioClient()
+    gpio_client = GPioClient.GpioClient()
     marlin_client = MarlinClient(com_port="/dev/ttyUSB0", baud_rate=250000)
     vaccine_robot = VaccineRobot(marlin_client=marlin_client, gpio_client=gpio_client)
     flask_app = FlaskApp(vaccine_robot=vaccine_robot)
