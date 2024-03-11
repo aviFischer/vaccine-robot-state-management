@@ -72,12 +72,12 @@ class VaccineRobot(IVaccineRobot):
         self.marlin_client.move_to_position(100, injection_z)
         self.marlin_client.move_to_position(200, injection_z)
         self.gpio_client.engage_plunger()
-        self.gpio_client.retract_plunger()
         self.marlin_client.move_to_position(100, injection_z)
+        self.gpio_client.retract_plunger()
         self.vaccine_delivered()
 
     def vaccine_disposal(self):
-        self.marlin_client.move_to_position(0, 150)
+        self.marlin_client.move_to_position(0, 20)
         self.gpio_client.engage_disposal_mechanism()
         self.gpio_client.retract_disposal_mechanism()
         if(self.gpio_client.get_breakbeam_sensor()):

@@ -32,7 +32,7 @@ class GpioClient(IGpioClient):
         GPIO.output(DISPOSAL_IN1, GPIO.HIGH)
         GPIO.output(DISPOSAL_IN2, GPIO.LOW)
 
-        time.sleep(8)
+        time.sleep(10)
 
         GPIO.output(DISPOSAL_IN1, GPIO.LOW)
         GPIO.output(DISPOSAL_IN2, GPIO.LOW)
@@ -41,7 +41,7 @@ class GpioClient(IGpioClient):
         GPIO.output(DISPOSAL_IN1, GPIO.LOW)
         GPIO.output(DISPOSAL_IN2, GPIO.HIGH)
 
-        time.sleep(8)
+        time.sleep(10)
 
         GPIO.output(DISPOSAL_IN1, GPIO.LOW)
         GPIO.output(DISPOSAL_IN2, GPIO.LOW)
@@ -50,7 +50,7 @@ class GpioClient(IGpioClient):
         GPIO.output(PLUNGER_IN1, GPIO.HIGH)
         GPIO.output(PLUNGER_IN2, GPIO.LOW)
 
-        time.sleep(8)
+        time.sleep(10)
 
         GPIO.output(PLUNGER_IN1, GPIO.LOW)
         GPIO.output(PLUNGER_IN2, GPIO.LOW)
@@ -59,7 +59,7 @@ class GpioClient(IGpioClient):
         GPIO.output(PLUNGER_IN1, GPIO.LOW)
         GPIO.output(PLUNGER_IN2, GPIO.HIGH)
 
-        time.sleep(8)
+        time.sleep(10)
 
         GPIO.output(PLUNGER_IN1, GPIO.LOW)
         GPIO.output(PLUNGER_IN2, GPIO.LOW)
