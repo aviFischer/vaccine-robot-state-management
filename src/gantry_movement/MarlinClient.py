@@ -2,6 +2,7 @@ import serial
 import time
 
 from .IMarlinClient import IMarlinClient
+from .utils import poll_for_ok
 
 class MarlinClient(IMarlinClient):
 
@@ -16,12 +17,13 @@ class MarlinClient(IMarlinClient):
         
     def home(self):
         self.serial_port.write(b"G28 X\r\n")
+        poll_for_ok(self.serial_port)
         self.serial_port.write(b"G28 Z\r\n")
-        time.sleep(20)
+        poll_for_ok(self.serial_port)
 
     def set_speed(self, speed):
         pass
 
     def move_to_position(self, x, z):
         self.serial_port.write(f"G1 X{x} Z{z}\r\n".encode(encoding="utf_8"))
-        time.sleep(10)
+        poll_for_ok(self.serial_port)
