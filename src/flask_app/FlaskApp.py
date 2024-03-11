@@ -27,6 +27,7 @@ class FlaskApp:
         self.app.route("/engage_disposal", methods=["POST"])(self.engage_disposal)
         self.app.route("/retract_disposal", methods=["POST"])(self.retract_disposal)
         self.app.route("/home", methods=["POST"])(self.home)
+        self.app.route("/ir_sensor", methods=["GET"])(self.get_IR_sensor)
 
     def injection_location(self):
         data = request.form 
@@ -87,6 +88,12 @@ class FlaskApp:
         self.marlin_client.home()
         response = {"message": "Gantry Homed"}
         return jsonify(response)
+    
+    def get_IR_sensor(self):
+        reading = self.gpio_client.get_breakbeam_sensor()
+        response = jsonify({"Sensor value": reading})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
 
     def run(self):
         self.app.run(debug=True)
