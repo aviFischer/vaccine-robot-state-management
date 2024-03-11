@@ -15,21 +15,25 @@ class FlaskApp:
         self.setup_routes()
 
     def setup_routes(self):
-        self.app.route('/injection_location', methods=['POST'])(self.injection_location)
-        self.app.route('/injection', methods=['POST'])(self.injection)
-        self.app.route('/clear_error', methods=['POST'])(self.clear_error)
-        self.app.route('/state', methods=['GET'])(self.get_state)
+        self.app.route("/injection_location", methods=["POST"])(self.injection_location)
+        self.app.route("/injection", methods=["POST"])(self.injection)
+        self.app.route("/clear_error", methods=["POST"])(self.clear_error)
+        self.app.route("/state", methods=["GET"])(self.get_state)
+        self.app.route("/engage_plunger", method=["POST"])(self.engage_plunger)
+        self.app.route("/retract_plunger", method=["POST"])(self.retract_plunger)
+        self.app.route("/engage_disposal", method=["POST"])(self.engage_disposal)
+        self.app.route("/retract_disposal", method=["POST"])(self.retract_disposal)
 
     def injection_location(self):
         data = request.form 
-        x = int(data.get('x', None))
-        y = int(data.get('y', None))
+        x = int(data.get("x", None))
+        y = int(data.get("y", None))
 
         if x == None or y == None:
             return "No injection location provided", 400
 
         self.vaccine_robot.set_injection_location((x, y))
-        response = {'message': f'Injection location received: {(x, y)}'}
+        response = {"message": f"Injection location received: {(x, y)}"}
         return jsonify(response)
     
     # state machine endpoints
