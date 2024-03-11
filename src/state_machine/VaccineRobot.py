@@ -70,7 +70,7 @@ class VaccineRobot(IVaccineRobot):
     def vaccine_delivery(self):
         injection_z = webcam_to_gantry(self.injection_location)
         self.marlin_client.move_to_position(100, injection_z)
-        self.marlin_client.move_to_position(200, injection_z)
+        self.marlin_client.move_to_position(250, injection_z)
         self.gpio_client.engage_plunger()
         self.marlin_client.move_to_position(100, injection_z)
         self.gpio_client.retract_plunger()
