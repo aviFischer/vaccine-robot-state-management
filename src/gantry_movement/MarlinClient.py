@@ -12,6 +12,8 @@ class MarlinClient(IMarlinClient):
             self.serial_port = serial.Serial(port=com_port, baudrate=baud_rate, timeout=1)
         except serial.SerialException:
             raise ValueError("Failed to connect to Marlin, check the serial port")
+        
+        print(self.serial_port.readline())
 
     def home(self):
         self.serial_port.write(b"G28 X")
