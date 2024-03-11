@@ -77,6 +77,11 @@ class FlaskApp:
         self.gpio_client.retract_disposal_mechanism()
         response = {"message": "Disposal mechanism retracted"}
         return jsonify(response)
+    
+    def home(self):
+        self.home()
+        response = {"message": "Gantry Homed"}
+        return jsonify(response)
 
     def run(self):
         self.app.run(debug=True)

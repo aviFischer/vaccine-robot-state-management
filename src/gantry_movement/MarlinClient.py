@@ -4,6 +4,8 @@ from .IMarlinClient import IMarlinClient
 
 class MarlinClient(IMarlinClient):
 
+    serial_port: serial.Serial
+
     def __init__(self, com_port, baud_rate):
 
         try:
@@ -13,9 +15,7 @@ class MarlinClient(IMarlinClient):
 
     def home(self):
         self.serial_port.write(b"G28 X")
-        self.serial_port.read(size=2)
         self.serial_port.write(b"G28 Z")
-        self.serial_port.read(size=2)
 
     def set_speed(self, speed):
         pass
