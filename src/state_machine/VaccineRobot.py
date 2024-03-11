@@ -27,7 +27,7 @@ class VaccineRobot(IVaccineRobot):
         self.state_machine.add_transition(trigger="vaccine_delivered", source="vaccine_delivery", dest="vaccine_disposal")
         self.state_machine.add_transition(trigger="vaccive_delivery_failed", source="vaccine_delivery", dest="error")
         self.state_machine.add_transition(trigger="vaccine_disposed", source="vaccine_disposal", dest="idle")
-        self.state_machine.add_transition(trigger="vaccine_disposal_failed", source="vaccine_disposal_failed", dest="error")
+        self.state_machine.add_transition(trigger="vaccine_disposal_failed", source="vaccine_disposal", dest="error")
         self.state_machine.add_transition(trigger="error_cleared", source="error", dest="idle")
 
         # wiring side effects to states
@@ -69,15 +69,15 @@ class VaccineRobot(IVaccineRobot):
 
     def vaccine_delivery(self):
         injection_z = webcam_to_gantry(self.injection_location)
-        self.marlin_client.move_to_position(400, injection_z)
-        self.marlin_client.move_to_position(500, injection_z)
+        self.marlin_client.move_to_position(100, injection_z)
+        self.marlin_client.move_to_position(200, injection_z)
         self.gpio_client.engage_plunger()
         self.gpio_client.retract_plunger()
-        self.marlin_client.move_to_position(400, injection_z)
+        self.marlin_client.move_to_position(100, injection_z)
         self.vaccine_delivered()
 
     def vaccine_disposal(self):
-        self.marlin_client.move_to_position(0, 100)
+        self.marlin_client.move_to_position(0, 150)
         self.gpio_client.engage_disposal_mechanism()
         self.gpio_client.retract_disposal_mechanism()
         if(self.gpio_client.get_breakbeam_sensor()):
