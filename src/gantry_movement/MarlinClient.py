@@ -29,5 +29,5 @@ class MarlinClient(IMarlinClient):
         self.serial_port.reset_input_buffer()
         self.serial_port.write(f"G1 X{x} Z{z}\r\n".encode(encoding="utf_8"))
         poll_for_ok(self.serial_port)
-        self.serial_port.write("M400")
+        self.serial_port.write(b"M400")
         poll_for_ok(self.serial_port)
