@@ -7,7 +7,7 @@ def main():
     gpio_client = MockGpioClient()
     marlin_client = MockMarlinClient()
     vaccine_robot = VaccineRobot(marlin_client=marlin_client, gpio_client=gpio_client)
-    flask_app = FlaskApp(vaccine_robot=vaccine_robot, gpio_client=gpio_client)
+    flask_app = FlaskApp(vaccine_robot=vaccine_robot, gpio_client=gpio_client, marlin_client=marlin_client)
 
     flask_app.run()
 

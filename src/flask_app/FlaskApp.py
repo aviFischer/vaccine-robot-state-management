@@ -2,14 +2,17 @@ from flask import Flask, request, jsonify
 
 from state_machine import IVaccineRobot
 from raspberrypi_gpio import IGpioClient
+from gantry_movement import IMarlinClient
 
 class FlaskApp:
     vaccine_robot: IVaccineRobot
     gpio_client: IGpioClient
+    marlin_client: IMarlinClient
 
-    def __init__(self, vaccine_robot: IVaccineRobot, gpio_client: IGpioClient):
+    def __init__(self, vaccine_robot: IVaccineRobot, gpio_client: IGpioClient, marlin_client: IMarlinClient):
         self.vaccine_robot = vaccine_robot
         self.gpio_client = gpio_client
+        self.marlin_client = marlin_client
 
         self.app = Flask(__name__)
         self.setup_routes()
@@ -23,7 +26,7 @@ class FlaskApp:
         self.app.route("/retract_plunger", methods=["POST"])(self.retract_plunger)
         self.app.route("/engage_disposal", methods=["POST"])(self.engage_disposal)
         self.app.route("/retract_disposal", methods=["POST"])(self.retract_disposal)
-        self.app.route("/home", methods=["POST"])(self.home())
+        self.app.route("/home", methods=["POST"])(self.home)
 
     def injection_location(self):
         data = request.form 
@@ -80,7 +83,7 @@ class FlaskApp:
         return jsonify(response)
     
     def home(self):
-        self.home()
+        self.marlin_client.home()
         response = {"message": "Gantry Homed"}
         return jsonify(response)
 
