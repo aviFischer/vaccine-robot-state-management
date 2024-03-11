@@ -23,6 +23,7 @@ class FlaskApp:
         self.app.route("/retract_plunger", methods=["POST"])(self.retract_plunger)
         self.app.route("/engage_disposal", methods=["POST"])(self.engage_disposal)
         self.app.route("/retract_disposal", methods=["POST"])(self.retract_disposal)
+        self.app.route("/home", methods=["POST"])(self.home())
 
     def injection_location(self):
         data = request.form 
