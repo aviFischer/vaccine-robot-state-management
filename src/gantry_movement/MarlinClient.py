@@ -16,6 +16,7 @@ class MarlinClient(IMarlinClient):
             raise ValueError("Failed to connect to Marlin, check the serial port")
         
     def home(self):
+        self.serial_port.reset_input_buffer()
         self.serial_port.write(b"G28 X\r\n")
         poll_for_ok(self.serial_port)
         self.serial_port.write(b"G28 Z\r\n")
@@ -25,5 +26,8 @@ class MarlinClient(IMarlinClient):
         pass
 
     def move_to_position(self, x, z):
+        self.serial_port.reset_input_buffer()
         self.serial_port.write(f"G1 X{x} Z{z}\r\n".encode(encoding="utf_8"))
+        poll_for_ok(self.serial_port)
+        self.serial_port.write("M400")
         poll_for_ok(self.serial_port)
