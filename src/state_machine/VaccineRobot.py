@@ -60,7 +60,7 @@ class VaccineRobot(IVaccineRobot):
 
     def vaccine_pickup(self):
         self.marlin_client.home()
-        if(self.gpio_client.get_breakbeam_sensor()):
+        if(self.gpio_client.get_breakbeam_sensor() == 0):
             print("Vaccine detected on carriage")
             self.vaccine_picked_up()
         else:
@@ -80,7 +80,7 @@ class VaccineRobot(IVaccineRobot):
         self.marlin_client.move_to_position(0, 20)
         self.gpio_client.engage_disposal_mechanism()
         self.gpio_client.retract_disposal_mechanism()
-        if(self.gpio_client.get_breakbeam_sensor()):
+        if(self.gpio_client.get_breakbeam_sensor() == 0):
             print("Failed to dispose vaccine")
             self.vaccine_disposal_failed()
         else:
