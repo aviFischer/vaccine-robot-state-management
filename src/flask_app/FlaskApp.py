@@ -19,10 +19,10 @@ class FlaskApp:
         self.app.route("/injection", methods=["POST"])(self.injection)
         self.app.route("/clear_error", methods=["POST"])(self.clear_error)
         self.app.route("/state", methods=["GET"])(self.get_state)
-        self.app.route("/engage_plunger", method=["POST"])(self.engage_plunger)
-        self.app.route("/retract_plunger", method=["POST"])(self.retract_plunger)
-        self.app.route("/engage_disposal", method=["POST"])(self.engage_disposal)
-        self.app.route("/retract_disposal", method=["POST"])(self.retract_disposal)
+        self.app.route("/engage_plunger", methods=["POST"])(self.engage_plunger)
+        self.app.route("/retract_plunger", methods=["POST"])(self.retract_plunger)
+        self.app.route("/engage_disposal", methods=["POST"])(self.engage_disposal)
+        self.app.route("/retract_disposal", methods=["POST"])(self.retract_disposal)
 
     def injection_location(self):
         data = request.form 
