@@ -21,4 +21,4 @@ class MarlinClient(IMarlinClient):
         pass
 
     def move_to_position(self, x, z):
-        self.serial_port.write(f"G1 X{x} Z{z}")
+        self.serial_port.write(f"G1 X{x} Z{z}".encode(encoding="utf_8"))
