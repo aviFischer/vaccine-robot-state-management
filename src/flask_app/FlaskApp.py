@@ -58,8 +58,9 @@ class FlaskApp:
         return jsonify(response)
 
     def get_state(self):
-        response = {"state": self.vaccine_robot.get_current_state()}
-        return jsonify(response)
+        response = jsonify({"state": self.vaccine_robot.get_current_state()})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
     
     # manual control endpoint
     def engage_plunger(self):
