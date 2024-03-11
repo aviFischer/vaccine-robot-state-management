@@ -12,9 +12,9 @@ class MarlinClient(IMarlinClient):
             raise ValueError("Failed to connect to Marlin, check the serial port")
 
     def home(self):
-        self.serial_port.write("G28 X")
+        self.serial_port.write(b"G28 X")
         self.serial_port.read(size=2)
-        self.serial_port.write("G28 Z")
+        self.serial_port.write(b"G28 Z")
         self.serial_port.read(size=2)
 
     def set_speed(self, speed):
