@@ -2,6 +2,6 @@ import serial
 
 def poll_for_ok(serial_port: serial.Serial):
     last_line = ""
-    while(last_line != b"ok"):
+    while(last_line != b"ok\n"):
         last_line = serial_port.readline()
         print(f"Serial Message: {last_line}")
