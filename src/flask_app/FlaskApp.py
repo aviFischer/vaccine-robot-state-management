@@ -32,7 +32,7 @@ class FlaskApp:
         self.app.route("/state_stream", methods=["GET"])(self.state_stream)
 
     def injection_location(self):
-        data = request.form 
+        data = request.json
         left_x = int(data.get("left_x", None))
         left_y = int(data.get("left_y", None))
         right_x = int(data.get("right_x", None))
