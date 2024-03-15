@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+import time
+from flask import Flask, request, jsonify, Response
 
 from state_machine import IVaccineRobot
 from raspberrypi_gpio import IGpioClient
@@ -28,6 +29,7 @@ class FlaskApp:
         self.app.route("/retract_disposal", methods=["POST"])(self.retract_disposal)
         self.app.route("/home", methods=["POST"])(self.home)
         self.app.route("/ir_sensor", methods=["GET"])(self.get_IR_sensor)
+        self.app.route("/state_stream", methods=["GET"])(self.state_stream)
 
     def injection_location(self):
         data = request.form 
@@ -62,6 +64,14 @@ class FlaskApp:
         response = jsonify({"state": self.vaccine_robot.get_current_state()})
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
+    
+    def state_stream(self):
+        def stream():
+            while True:
+                yield self.vaccine_robot.get_current_state()   
+                time.sleep(1)
+
+        return Response(stream(), mimetype='text/event-stream')
     
     # manual control endpoint
     def engage_plunger(self):
