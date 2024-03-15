@@ -33,14 +33,17 @@ class FlaskApp:
 
     def injection_location(self):
         data = request.form 
-        x = int(data.get("x", None))
-        y = int(data.get("y", None))
+        left_x = int(data.get("left_x", None))
+        left_y = int(data.get("left_y", None))
+        right_x = int(data.get("right_x", None))
+        right_y = int(data.get("right_y", None))
 
-        if x == None or y == None:
+        if left_x == None or left_y == None or right_x == None or right_y == None:
             return "No injection location provided", 400
 
-        self.vaccine_robot.set_injection_location((x, y))
-        response = {"message": f"Injection location received: {(x, y)}"}
+        # Assuming right shoulder only for now
+        self.vaccine_robot.set_injection_location((right_x, right_y))
+        response = {"message": f"Injection location received: {(right_x, right_y)}"}
         return jsonify(response)
     
     # state machine endpoints
