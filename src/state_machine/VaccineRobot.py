@@ -4,6 +4,7 @@ from .IVaccineRobot import IVaccineRobot
 from gantry_movement import IMarlinClient
 from raspberrypi_gpio import IGpioClient
 from .utils import verify_shoulder_location, webcam_to_gantry
+import locations
 
 class VaccineRobot(IVaccineRobot):
 
@@ -69,15 +70,15 @@ class VaccineRobot(IVaccineRobot):
 
     def vaccine_delivery(self):
         injection_z = webcam_to_gantry(self.injection_location)
-        self.marlin_client.move_to_position(100, injection_z)
-        self.marlin_client.move_to_position(250, injection_z)
+        self.marlin_client.move_to_position(locations.ready_to_inject_x, injection_z)
+        self.marlin_client.move_to_position(locations.inject_x, injection_z)
         self.gpio_client.engage_plunger()
-        self.marlin_client.move_to_position(100, injection_z)
+        self.marlin_client.move_to_position(locations.ready_to_inject_x, injection_z)
         self.gpio_client.retract_plunger()
         self.vaccine_delivered()
 
     def vaccine_disposal(self):
-        self.marlin_client.move_to_position(0, 20)
+        self.marlin_client.move_to_position(locations.disposal_x, locations.disposal_z)
         self.gpio_client.engage_disposal_mechanism()
         self.gpio_client.retract_disposal_mechanism()
         if(self.gpio_client.get_breakbeam_sensor() == 0):
