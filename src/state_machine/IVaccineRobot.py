@@ -68,3 +68,7 @@ class IVaccineRobot(ABC):
     @abstractmethod
     def get_current_state(self):
         pass
+
+    @abstractmethod
+    def move_to_shoulder(self):
+        pass

@@ -30,6 +30,7 @@ class FlaskApp:
         self.app.route("/home", methods=["POST"])(self.home)
         self.app.route("/ir_sensor", methods=["GET"])(self.get_IR_sensor)
         self.app.route("/state_stream", methods=["GET"])(self.state_stream)
+        self.app.route("/move_to_shoulder", methods=["POST"])(self.move_to_shoulder)
 
     def injection_location(self):
         data = request.json
@@ -41,9 +42,9 @@ class FlaskApp:
         if left_x == None or left_y == None or right_x == None or right_y == None:
             return "No injection location provided", 400
 
-        # Assuming right shoulder only for now
-        self.vaccine_robot.set_injection_location((right_x, right_y))
-        response = {"message": f"Injection location received: {(right_x, right_y)}"}
+        # Assuming left shoulder only for now
+        self.vaccine_robot.set_injection_location((left_x, left_y))
+        response = {"message": f"Injection location received: {(left_x, left_y)}"}
         return jsonify(response)
     
     # state machine endpoints
@@ -107,6 +108,9 @@ class FlaskApp:
         response = jsonify({"Sensor value": reading})
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
+    
+    def move_to_shoulder(self):
+        self.vaccine_robot.move_to_shoulder()
 
     def run(self):
         self.app.run(debug=True)

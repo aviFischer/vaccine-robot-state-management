@@ -1,9 +1,9 @@
 # defining range of webcam coordinates we tolerate shoulder in
-ALLOWABLE_X_RANGE = (50, 100)
-ALLOWABLE_Y_RANGE = (50, 100)
+ALLOWABLE_X_RANGE = (350, 400)
+ALLOWABLE_Y_RANGE = (200, 400)
 
 SCALING_FACTOR = 1
-BIAS = 0
+BIAS = 200
 
 def verify_shoulder_location(location:tuple[float, float]):
     if(not location):
