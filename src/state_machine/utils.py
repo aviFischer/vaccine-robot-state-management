@@ -1,6 +1,6 @@
 # defining range of webcam coordinates we tolerate shoulder in
-ALLOWABLE_X_RANGE = (350, 400)
-ALLOWABLE_Y_RANGE = (200, 400)
+ALLOWABLE_X_RANGE = (300, 450)
+ALLOWABLE_Y_RANGE = (150, 400)
 
 SCALING_FACTOR = 1
 BIAS = -200
