@@ -121,4 +121,6 @@ class VaccineRobot(IVaccineRobot):
 
     # manual control
     def move_to_shoulder(self):
-        self.marlin_client.move_to_position(ready_to_inject_x, webcam_to_gantry(self.injection_location))
+        z = webcam_to_gantry(self.injection_location)
+        print(f"Moving to z={z}")
+        self.marlin_client.move_to_position(ready_to_inject_x, z)
