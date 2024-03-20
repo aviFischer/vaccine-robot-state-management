@@ -15,6 +15,7 @@ class VaccineRobot(IVaccineRobot):
     gpio_client: IGpioClient
 
     injection_location: tuple[float, float]
+    current_injection_location: tuple[float, float]
 
     def __init__(self, marlin_client: IMarlinClient, gpio_client: IGpioClient):
         self.state_machine = Machine(model=self, states=self.states, initial="idle")
@@ -54,6 +55,7 @@ class VaccineRobot(IVaccineRobot):
     def determine_injection_location(self):
         if(verify_shoulder_location(self.injection_location)):
             print("Able to detect an injection location")
+            self.current_injection_location = self.injection_location
             self.shoulder_detected()
         else:
             print("Unable to detect an injection location")
@@ -69,7 +71,7 @@ class VaccineRobot(IVaccineRobot):
             self.vaccine_pickup_failed()
 
     def vaccine_delivery(self):
-        injection_z = webcam_to_gantry(self.injection_location)
+        injection_z = webcam_to_gantry(self.current_injection_location)
         self.marlin_client.move_to_position(ready_to_inject_x, injection_z)
         self.marlin_client.move_to_position(inject_x, injection_z)
         self.gpio_client.engage_plunger()
