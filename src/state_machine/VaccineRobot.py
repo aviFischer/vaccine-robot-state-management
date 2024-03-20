@@ -75,7 +75,7 @@ class VaccineRobot(IVaccineRobot):
         self.marlin_client.move_to_position(ready_to_inject_x, injection_z)
         self.marlin_client.move_to_position(inject_x, injection_z)
         self.gpio_client.engage_plunger()
-        self.marlin_client.move_to_position(ready_to_inject_x, injection_z)
+        self.marlin_client.move_to_position(disposal_x, injection_z)
         self.gpio_client.retract_plunger()
         self.vaccine_delivered()
 
