@@ -111,6 +111,8 @@ class FlaskApp:
     
     def move_to_shoulder(self):
         self.vaccine_robot.move_to_shoulder()
+        response = {"message": "Move Successful"}
+        return jsonify(response)
 
     def run(self):
         self.app.run(debug=True)
