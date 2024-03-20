@@ -3,7 +3,7 @@ ALLOWABLE_X_RANGE = (350, 400)
 ALLOWABLE_Y_RANGE = (200, 400)
 
 SCALING_FACTOR = 1
-BIAS = 200
+BIAS = -200
 
 def verify_shoulder_location(location:tuple[float, float]):
     if(not location):
